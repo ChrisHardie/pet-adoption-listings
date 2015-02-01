@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: Pet Adoption Listings
-Plugin URI:
+Plugin URI: https://wordpress.org/plugins/pet-adoption-listings/
 Description: Display adoptable pets from an Adopt-a-Pet.com shelter's listings
 Version: 1.0
 Author: Chris Hardie
