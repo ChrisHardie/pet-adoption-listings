@@ -4,9 +4,9 @@
 Plugin Name: Pet Adoption Listings
 Plugin URI: https://wordpress.org/plugins/pet-adoption-listings/
 Description: Display adoptable pets from an Adopt-a-Pet.com shelter's listings
-Version: 1.1
+Version: 1.2
 Author: Chris Hardie
-Author URI: http://www.chrishardie.com/
+Author URI: https://chrishardie.com/
 License: GPL2
 */
 
@@ -27,7 +27,7 @@ License: GPL2
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-defined('ABSPATH') or die("Please don't try to run this file directly.");
+defined( 'ABSPATH' ) ||  die( "Please don't try to run this file directly." );
 
 class Pet_Adoption_Listings_Widget extends WP_Widget {
 	/**
@@ -37,7 +37,9 @@ class Pet_Adoption_Listings_Widget extends WP_Widget {
 		parent::__construct(
 			'pet_adoption_listings_widget', // base id
 			__( 'Pet Adoption Listings Widget', 'pet_adoption_listings_widget_domain' ), // name
-			array( 'description' => __( 'A widget to display adoptable pets from an Adopt-a-Pet.com shelter.', 'pet_adoption_listings_widget_domain' ) )
+			array(
+				'description' => __( 'A widget to display adoptable pets from an Adopt-a-Pet.com shelter.', 'pet_adoption_listings_widget_domain' ),
+			)
 		);
 	}
 
@@ -50,7 +52,6 @@ class Pet_Adoption_Listings_Widget extends WP_Widget {
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
-		extract( $args, EXTR_SKIP );
 
 		$title = apply_filters( 'widget_title', $instance['title'] );
 		$shelter_id = apply_filters( 'widget_shelter_id', $instance['shelter_id'] );
@@ -69,36 +70,36 @@ class Pet_Adoption_Listings_Widget extends WP_Widget {
 		}
 
 		// Output the widget content
-		echo $before_widget;
+		echo wp_kses_post( $args['before_widget'] );
 
 		// Title
-		if ( !empty( $title ) ) {
-			echo $before_title . $title . $after_title;
+		if ( ! empty( $title ) ) {
+			echo wp_kses_post( $args['before_title'] . $title . $args['after_title'] );
 		}
 
 		// Adapted from http://shelterblog.adoptapet.com/2014/01/add-your-pet-list-in-wordpress/
 		// In future versions we could allow some customization to match the theme.
 		echo '<div class="pet_adoption_listings_widget_main" style="text-align: center;">
 			<iframe height="' . esc_attr( $iframe_height ) . '" frameborder="0" marginwidth="0" marginheight="0" scrolling="1"
-			        src="https://searchtools.adoptapet.com/cgi-bin/searchtools.cgi/portable_pet_list?'
-			 . 'shelter_id='
-		     . esc_attr( $shelter_id )
-			 . '&clan_name='
-		     . esc_attr( $clan_name )
-		     . '&title=&color=green&size=450x320_list&sort_by=pet_name&hide_clan_filter_p="></iframe>';
+				src="https://searchtools.adoptapet.com/cgi-bin/searchtools.cgi/portable_pet_list?'
+			. 'shelter_id='
+			. esc_attr( $shelter_id )
+			. '&clan_name='
+			. esc_attr( $clan_name )
+			. '&title=&color=green&size=450x320_list&sort_by=pet_name&hide_clan_filter_p="></iframe>';
 
 		// Show credit link
 		if ( $instance['show_credit_p'] ) {
 
 			echo '<div class="pet_adoption_listings_widget_credit" style="font-size: x-small;">Pet adoption and rescue <br/>powered by
-				<a href="http://www.adoptapet.com/" title="Pet adoption and rescue powered by Adopt-a-Pet.com">Adopt-a-Pet.com</a>
+				<a href="https://www.adoptapet.com/" title="Pet adoption and rescue powered by Adopt-a-Pet.com">Adopt-a-Pet.com</a>
 			</div>';
 
 		}
 
 		echo '</div>';
 
-		echo $after_widget;
+		echo wp_kses_post( $args['after_widget'] );
 	}
 
 	/**
@@ -117,7 +118,7 @@ class Pet_Adoption_Listings_Widget extends WP_Widget {
 		$instance['shelter_id'] = ( ! empty( $new_instance['shelter_id'] ) ) ? strip_tags( $new_instance['shelter_id'] ) : '';
 		$instance['iframe_height'] = ( ! empty( $new_instance['iframe_height'] ) ) ? strip_tags( $new_instance['iframe_height'] ) : '';
 		$instance['clan_name'] = ( ! empty( $new_instance['clan_name'] ) ) ? strip_tags( $new_instance['clan_name'] ) : '';
-		$instance['show_credit_p'] = !empty($new_instance['show_credit_p']) ? 1 : 0;
+		$instance['show_credit_p'] = ! empty( $new_instance['show_credit_p'] ) ? 1 : 0;
 
 		return $instance;
 
@@ -129,28 +130,26 @@ class Pet_Adoption_Listings_Widget extends WP_Widget {
 	 * @see WP_Widget::form()
 	 *
 	 * @param array $instance Previously saved values from database.
+	 * @return string
 	 */
 	public function form( $instance ) {
 
+		$title = __( 'Adoptable pets at our shelter:', 'pet_adoption_listings_widget_domain' );
+		$current_clan_name = 'all';
+		$shelter_id = '';
+		$iframe_height = 450;
+
 		if ( isset( $instance['title'] ) ) {
 			$title = esc_attr( $instance['title'] );
-		} else {
-			$title = __( 'Adoptable pets at our shelter:', 'pet_adoption_listings_widget_domain' );
 		}
 		if ( isset( $instance['clan_name'] ) ) {
 			$current_clan_name = esc_attr( $instance['clan_name'] );
-		} else {
-			$current_clan_name = 'all';
 		}
 		if ( isset( $instance['shelter_id'] ) ) {
 			$shelter_id = esc_attr( $instance['shelter_id'] );
-		} else {
-			$shelter_id = '';
 		}
 		if ( isset( $instance['iframe_height'] ) ) {
 			$iframe_height = esc_attr( $instance['iframe_height'] );
-		} else {
-			$iframe_height = 450;
 		}
 
 		// Should we show the credit link to Adopt-a-Pet.com? (Must be opt-in per WordPress.org guidelines.)
@@ -173,29 +172,29 @@ class Pet_Adoption_Listings_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
-			       name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text"
-			       value="<?php echo esc_attr( $title ); ?>">
+				name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text"
+				value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'shelter_id' ) ); ?>"><?php esc_html_e( 'Shelter ID:' ); ?> (required, found at Adopt-a-Pet.com)</label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'shelter_id' ) ); ?>"
-			       name="<?php echo esc_attr( $this->get_field_name( 'shelter_id' ) ); ?>" type="text"
-			       value="<?php echo esc_attr( $shelter_id ); ?>">
+				name="<?php echo esc_attr( $this->get_field_name( 'shelter_id' ) ); ?>" type="text"
+				value="<?php echo esc_attr( $shelter_id ); ?>">
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'clan_name' ) ); ?>"><?php esc_html_e( 'Types of Pets to Show:' ); ?></label>
-			<select name="<?php echo esc_attr( $this->get_field_name( 'clan_name' ) ); ?>" id="<?php echo $this->get_field_id( 'clan_name' ); ?>">
-				<?php foreach( array_keys( $clan_options ) as $clan_name ) : ?>
-					<option value="<?php echo esc_attr( $clan_name ) ?>" <?php esc_html( selected( $clan_name, $current_clan_name ) ); ?>><?php echo esc_html( $clan_options[$clan_name] ); ?></option>
+			<select name="<?php echo esc_attr( $this->get_field_name( 'clan_name' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'clan_name' ) ); ?>">
+				<?php foreach ( array_keys( $clan_options ) as $clan_name ) : ?>
+					<option value="<?php echo esc_attr( $clan_name ) ?>" <?php esc_html( selected( $clan_name, $current_clan_name ) ); ?>><?php echo esc_html( $clan_options[ $clan_name ] ); ?></option>
 				<?php endforeach; ?>
 			</select>
 
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'iframe_height' ); ?>"><?php esc_html_e( 'List Height (px):' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'iframe_height' ) ); ?>"><?php esc_html_e( 'List Height (px):' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'iframe_height' ) ); ?>"
-			       name="<?php echo esc_attr( $this->get_field_name( 'iframe_height' ) ); ?>" type="text"
-			       value="<?php echo esc_attr( $iframe_height ); ?>">
+				name="<?php echo esc_attr( $this->get_field_name( 'iframe_height' ) ); ?>" type="text"
+				value="<?php echo esc_attr( $iframe_height ); ?>">
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $show_credit_p ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_credit_p' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_credit_p' ) ); ?>" />
@@ -209,7 +208,8 @@ class Pet_Adoption_Listings_Widget extends WP_Widget {
 
 class JCH_PetAdoptionListingsShortcode {
 
-	public static function pet_adoption_listings_shortcode( $atts, $content=null ) {
+	public static function pet_adoption_listings_shortcode( $atts, $content = null ) {
+
 		$atts = shortcode_atts( array(
 			'shelter_id' => '',
 			'clan_name' => 'all',
@@ -234,12 +234,12 @@ class JCH_PetAdoptionListingsShortcode {
 		// Adapted from http://shelterblog.adoptapet.com/2014/01/add-your-pet-list-in-wordpress/
 		$petlist = '<div class="pet_adoption_listings_shortcode_main" style="text-align: center;">
 			<iframe width="' . esc_attr( $atts['iframe_width'] ) . '" height="' . esc_attr( $atts['iframe_height'] ) . '" frameborder="0" marginwidth="0" marginheight="0" scrolling="1"
-			        src="https://searchtools.adoptapet.com/cgi-bin/searchtools.cgi/portable_pet_list?'
-		     . 'shelter_id='
-		     . esc_attr( $atts['shelter_id'] )
-		     . '&clan_name='
-		     . esc_attr( $atts['clan_name'] )
-		     . '&title=&color=green&size=450x320_list&sort_by=pet_name&hide_clan_filter_p="></iframe></div>';
+				src="https://searchtools.adoptapet.com/cgi-bin/searchtools.cgi/portable_pet_list?'
+			. 'shelter_id='
+			. esc_attr( $atts['shelter_id'] )
+			. '&clan_name='
+			. esc_attr( $atts['clan_name'] )
+			. '&title=&color=green&size=450x320_list&sort_by=pet_name&hide_clan_filter_p="></iframe></div>';
 
 		return $petlist;
 
@@ -248,7 +248,8 @@ class JCH_PetAdoptionListingsShortcode {
 
 add_action('widgets_init', function() {
 	register_widget( 'Pet_Adoption_Listings_Widget' );
-});
+} );
+
 add_shortcode( 'pet_adoption_listings', array( 'JCH_PetAdoptionListingsShortcode', 'pet_adoption_listings_shortcode' ) );
 
 ?>

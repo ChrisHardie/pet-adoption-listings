@@ -2,7 +2,7 @@
 Contributors: chrishardie
 Tags: adoptable pets,adoption,pets,animals
 Requires at least: 2.8
-Tested up to: 4.7
+Tested up to: 4.9
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -34,6 +34,12 @@ Want to help make this plugin better? <a href="https://github.com/ChrisHardie/pe
 4. The widget front-end display
 
 == Changelog ==
+
+= 1.2 =
+
+* Improvement: minor code formatting and cleanup
+* Improvement: use SSL version of Adopt-a-Pet.com site in optional credit link
+* Tested against WordPress 4.9
 
 = 1.1 =
 
