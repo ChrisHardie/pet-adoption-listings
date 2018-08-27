@@ -246,6 +246,8 @@ class JCH_PetAdoptionListingsShortcode {
 	}
 }
 
+require_once( 'blocks/pet-adoption-listings.php' );
+
 add_action('widgets_init', function() {
 	register_widget( 'Pet_Adoption_Listings_Widget' );
 } );
