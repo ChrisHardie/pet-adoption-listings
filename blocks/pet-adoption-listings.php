@@ -52,6 +52,16 @@ function pet_adoption_listings_block_init() {
 			'shelter_id' => array(
 				'type' => 'string',
 			),
+			'clan_name' => array(
+				'type' => 'string',
+			),
+			'iframe_height' => array(
+				'type' => 'integer',
+			),
+			'iframe_width' => array(
+				'type' => 'integer',
+			),
+
 		),
 		'editor_script'   => 'pet-adoption-listings-block-editor', // The script name we gave in the wp_register_script() call.
 		'render_callback' => array( 'JCH_PetAdoptionListingsShortcode', 'pet_adoption_listings_shortcode' ),

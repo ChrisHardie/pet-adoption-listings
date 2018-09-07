@@ -11,6 +11,7 @@
 	var el = wp.element.createElement,
         ServerSideRender = wp.components.ServerSideRender,
         TextControl = wp.components.TextControl,
+        SelectControl = wp.components.SelectControl,
         InspectorControls = wp.editor.InspectorControls;
 
 	/**
@@ -35,6 +36,8 @@
 		 * The categories provided by core are `common`, `embed`, `formatting`, `layout` and `widgets`.
 		 */
 		category: 'widgets',
+
+		icon: 'list-view',
 
 		/**
 		 * Optional block extended support features.
@@ -75,7 +78,34 @@
                         label: 'Shelter ID',
                         value: props.attributes.shelter_id,
                         onChange: ( value ) => { props.setAttributes( { shelter_id: value } ); },
-                    } )
+                    } ),
+                    el( SelectControl, {
+                        label: 'Types of Pets to Show by Default',
+                        value: props.attributes.clan_name,
+                        onChange: ( value ) => { props.setAttributes( { clan_name: value } ); },
+                        options: [
+                            { value: 'all', label: 'Show All Types of Pets' },
+                            { value: 'dog', label: 'Show Only Dogs' },
+                            { value: 'cat', label: 'Show Only Cats' },
+                            { value: 'rabbit', label: 'Show Only Rabbits' },
+                            { value: 'bird', label: 'Show Only Birds' },
+                            { value: 'horse', label: 'Show Only Horses' },
+                            { value: 'small_animal', label: 'Show Only Small Animals' },
+                            { value: 'reptile', label: 'Show Only Reptiles, Amphibians, and/or Fish' },
+                            { value: 'farm_animal', label: 'Show Only Farm-Type Animals' },
+                        ]
+                    } ),
+                    el( TextControl, {
+                        label: 'iframe Height, in pixels',
+                        value: props.attributes.iframe_height ? parseInt(props.attributes.iframe_height) : 450 ,
+                        onChange: ( value ) => { props.setAttributes( { iframe_height: value } ); },
+                    } ),
+                    el( TextControl, {
+                        label: 'iframe Width, in pixels',
+                        value: props.attributes.iframe_width ? parseInt(props.attributes.iframe_width) : 500,
+                        onChange: ( value ) => { props.setAttributes( { iframe_width: value } ); },
+                    } ),
+
                 ),
             ];
 		},
