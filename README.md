@@ -1,4 +1,4 @@
-# Printable PDF Newspaper
+# Pet Adoption Listings
 
 > Display adoptable pets from an Adopt-a-Pet.com shelter's listings.
 
