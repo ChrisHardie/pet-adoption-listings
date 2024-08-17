@@ -2,7 +2,7 @@
 Contributors: chrishardie
 Tags: adoptable pets,adoption,pets,animals
 Requires at least: 2.8
-Tested up to: 6.0
+Tested up to: 6.6
 Version: 1.2
 Stable tag: trunk
 License: GPL2

@@ -2,7 +2,7 @@
 
 > Display adoptable pets from an Adopt-a-Pet.com shelter's listings.
 
-[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/tag/ChrisHardie/pet-adoption-listings.svg?label=release)](https://github.com/ChrisHardie/pet-adoption-listings/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/pet-adoption-listings) [![GPLv2 License](https://img.shields.io/github/license/ChrisHardie/pet-adoption-listings.svg)](https://github.com/ChrisHardie/pet-adoption-listings/blob/master/LICENSE) [![Follow @ChrisHardie](https://img.shields.io/twitter/follow/ChrisHardie?style=social)](https://twitter.com/ChrisHardie)
+[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/tag/ChrisHardie/pet-adoption-listings.svg?label=release)](https://github.com/ChrisHardie/pet-adoption-listings/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/pet-adoption-listings) [![GPLv2 License](https://img.shields.io/github/license/ChrisHardie/pet-adoption-listings.svg)](https://github.com/ChrisHardie/pet-adoption-listings/blob/master/LICENSE) [![Follow @ChrisHardie](https://img.shields.io/mastodon/follow/000337759)](https://mastodon.social/@ChrisHardie)
 
 ## Description
 
